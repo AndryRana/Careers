@@ -1,0 +1,22 @@
+{% extends 'modals/forms/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="internModal" {% endblock %}
+<!--===Modal Title===-->
+{% block title-modal %} Intern job{% endblock  %}
+
+<!-- Form Action -->
+{% block action %} action="/intern_email" {% endblock action %}
+
+<!-- Form Validation -->
+{% block validation %} onsubmit="return intern_form_valid()" {% endblock validation  %}
+
+<!-- ==================== INPUT ID ==================== -->
+{% block id-name %} id="name_intern" {% endblock id-name %} 
+{% block id-age %} id="age_intern" {% endblock id-age %} 
+{% block id-email %} id="email_intern" {% endblock id-email %} 
+{% block id-phone %} id="phone_intern" {% endblock id-phone %} 
+{% block id-address %} id="address_intern" {% endblock id-address %} 
+{% block id-experience %} id="experience_intern" {% endblock id-experience %} 
+{% block id-skills %} id="skills_intern" {% endblock id-skills %} 
+{% block id-file %} id="file_intern" {% endblock id-file %}

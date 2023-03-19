@@ -1,0 +1,25 @@
+{% extends "modals/various/layout.html" %}
+
+<!-- Modal ID-->
+{% block id-modal %} id="supportModalPopup" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="fas fa-headset"></i>&nbsp;&nbsp; Support
+{% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<div class="text-center small_text text-info">
+    <span class="fa-stack fa-3x">
+        <i class="fas fa-cloud fa-stack-2x"></i>
+        <i class="text-dark fas fa-user-cog fa-stack-1x fa-inverse"></i>
+    </span>
+</div>
+<div class="text-center mid_text mt-2 mb-3" >24 hours a day and 7 days a week.</div>
+{% endblock %}
+
+<!--Action btn-->
+{% block btn-action %}
+<a href="{% url 'support'%}" class="btn btn-outline-info btn-sm modal_button">Send</a>
+{% endblock %}

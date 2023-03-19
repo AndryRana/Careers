@@ -1,0 +1,22 @@
+{% extends "modals/duplicate_msg/layout.html" %}
+
+<!-- Modal ID-->
+{% block id-modal %} id="duplicate_resume_modal" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-danger fas fa-exclamation-triangle"></i>&nbsp;&nbsp; Oh Noez !
+{% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<div class="text-center text-primary small_text">
+    <i class="text-danger fas fa-exclamation-triangle fa-5x"></i>
+</div>
+<div class="text-danger mb-2 mt-2 msg_duplicate"> Your resume has already been registered</div>
+<div class="mb-3" style="font-size:14px;">
+    Note: If you would like to update your resume, please contact support
+    <a href="{% url 'support'%}" class="text-warning">Support</a>
+</div>
+{% endblock %}
+

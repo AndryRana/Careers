@@ -1,0 +1,74 @@
+{%  extends 'modals/backend/layout.html' %}
+
+<!-- Modal ID -->
+{% block id-modal %} id="jobOpeningsModal{{ job.id }}" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-success fas fa-users"></i>&nbsp;&nbsp; Job openings
+{% endblock %}
+
+<!--Block notepad From --> 
+{% block form-notepad %} 
+<!--outline color input -->
+{% block input-outline-color %}
+<style>
+    #input_backend_job:focus {
+        box-shadow: 0 0 8px rgba(49, 210, 242, 1) !important;
+    }
+</style>
+{% endblock  %}
+<form action="/openings" method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="modal-body">
+        <span class="card p-2 text-center mb-2 border-success text-dark lg_text" style="width: 100%;">
+            Number of Job openings 
+        </span>
+        <input type="hidden" name="id" value="{{ job.id }}" readonly>
+        <div class="justify-content-between mb-2 mt-3">
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <button class="btn btn-outline-success card_font btn-lg" style="width:100%; cursor: default;">
+                        <i class="fab fa-3x fa-brands fa-js"></i>
+                        <br><span style="font-size:13px;">Frontend</span>
+                    </button>
+                    <div class="input-group mb-2 input-group-sm ">
+                        <input type="text" id="input_backend_job" class="form-control mt-2 text-center openings_job" name="frontend" value="{{ job.frontend }}">
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <button class="btn btn-outline-success card_font btn-lg" style="width:100%; cursor: default;">
+                        <i class="fab fa-3x fa-brands fa-java"></i>
+                        <br><span style="font-size:13px;">Backend</span>
+                    </button>
+                    <div class="input-group mb-2 input-group-sm ">
+                        <input type="text" id="input_backend_job" class="form-control mt-2 text-center openings_job" name="backend" value="{{ job.backend }}">
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <button class="btn btn-outline-success card_font btn-lg" style="width:100%; cursor: default;">
+                        <i class="fab fa-3x fa-node"></i>
+                        <br><span style="font-size:13px;">Fullstack</span>
+                    </button>
+                    <div class="input-group mb-2 input-group-sm ">
+                        <input type="text" id="input_backend_job" class="form-control mt-2 text-center openings_job" name="fullstack" value="{{ job.fullstack }}">
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <button class="btn btn-outline-success card_font btn-lg" style="width:100%; cursor: default;">
+                        <i class="fas fa-sharp fa-regular fa-folder fa-3x"></i>
+                        <br><span style="font-size:13px;">Intern</span>
+                    </button>
+                    <div class="input-group mb-2 input-group-sm ">
+                        <input type="text" id="input_backend_job" class="form-control mt-2 text-center openings_job" name="intern" value="{{ job.intern }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm modal_button" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-success btn-sm modal_button" id="btn_openings">Save</button>
+    </div>
+</form>
+{% endblock %}

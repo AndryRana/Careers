@@ -1,0 +1,18 @@
+{% extends 'modals/closedPosition/layout.html' %}
+
+<!-- Modal Id -->
+{% block id-modal %} id="all_countdown_closed" {% endblock %}
+
+<!-- Modal Title (root) -->
+{% block title_base %}
+<i class="text-danger fas fa-hourglass-end"></i>&nbsp;&nbsp; Time is over
+{% endblock  %}
+
+<!-- Job closed (root) -->
+{% block closed_base %}
+<span class="text-danger">The time limit for applications has expired</span>
+<div class="mt-2" style="font-size: 12px;">All vacant positions have been closed.
+    Click the following link to be informed when there are positions available -
+    <a class="text-danger" href="{% url 'waiting_list' %}">Waiting list</a>
+</div>
+{% endblock %}

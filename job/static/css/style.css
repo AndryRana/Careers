@@ -1,0 +1,467 @@
+/* ---------------------------------- 
+# START CONFIGURATION
+---------------------------------- */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    max-width: 100%;
+    overflow: visible;
+}
+
+/* ---------------------------------- 
+# LOGIN
+---------------------------------- */
+#login-card {
+    width: 500px;
+}
+.border-login {
+    background-color:rgba(117, 25, 255, 0.35);
+    border-top: .3rem solid #31D2F2;
+    border-bottom: .3rem solid #31d2f2;
+    border-radius: 18px;
+}
+.form-check-input:checked {
+    background-color: #31D2F2 !important;
+    border: #31D2F2 !important;
+    box-shadow: 1px 1px 15px rgba(49, 210, 242, 1) !important;
+}
+.form-check-input {
+    border: #31D2F2 !important;
+    box-shadow: 1px 1px 18px rgba(49, 210, 242, 0.75) !important;
+}
+.form-switch .form-check-input:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='grey'/%3e%3c/svg%3e");
+}
+/* Remove blue color and add aqua color when focusing on input */
+.form-control:focus {
+    border-color: #31D2F2;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn:focus, .btn-active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* ---------------------------------- 
+# FOOTER
+---------------------------------- */
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+#footer,
+.push {
+    height: 50px;
+}
+
+/* ---------------------------------- 
+# MESSAGE ANIMATION
+---------------------------------- */
+.message_btn {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    padding: 3px;
+    position: fixed;
+    left: 25px;
+    bottom: 80px;
+    animation: custom 3s linear infinite;
+}
+@keyframes custom {
+    0% { box-shadow: 0 0 0 0  rgba(49, 210, 242, 0.65), 0 0 0 0  rgba(49, 210, 242, 0.65);}
+    30% { box-shadow: 0 0 0 15px rgba(117, 25, 255, 0.3), 0 0 0 0  rgba(49, 210, 242, 0.65);}
+    70% { box-shadow: 0 0 0 25px rgba(117, 25, 255, 0.3), 0 0 0 15px  rgba(117, 25, 255, 0.3);}
+    100% { box-shadow: 0 0 0 0 rgba(117, 25, 255, 0), 0 0 0 15px  rgba(117, 25, 255, 0);}
+}
+
+#message_modal_dialog {
+    position: absolute;
+    left: 15px;
+    bottom: 45px;
+    width: 450px;
+}
+
+
+/* ---------------------------------- 
+#  OTHER
+---------------------------------- */
+/* left navbar */
+#navbar-main{
+    text-align: center;
+    color: #fff;
+    margin-left: 25px;
+}
+
+.typed-effect2 {
+    font-size: 20px;
+
+}
+/* Block typed effect and button job */
+.btn_typed_position {
+    width: 80%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Btn Job opportunities (home.html) */
+#btn-job {
+    width: 270px;
+    font-size: 22px;
+    border-radius: 30px;
+    margin-bottom: -50px;
+}
+
+/* Labels with icon (left side of inputs) */
+.label_icon {
+    width: 45px;
+}
+/* Button inside the modals popup */
+.cancel_button, .send_button, .modal_button {
+    width: 65px;
+}
+
+#nav-right {
+    margin-right: 25px; 
+    font-size: 25px;
+}
+/* backend countdown */
+#timer {
+   font-size: 20px;
+}
+/* Frontend countdown */
+#ticking {
+    font-size: 20px;
+}
+
+/* candidates total number in backend modal */
+#candidate_number {
+    font-size: 80px;
+}
+/* duplicated modal title */
+.msg_duplicate{
+    font-size: 20px;
+}
+/* logout text in modal */
+.logout_text {
+    font-size: 17px;
+}
+
+.notepad_date_title{
+    font-size: 16px;
+}
+
+#no_wait_list, #support_ban {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.error_404{
+    font-size: 70px
+}
+
+/* ---------------------------------- 
+# SPINNER FRONTEND (ANIMATION)
+---------------------------------- */
+#spinner_loader {
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: blueviolet;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 32px);
+    width: 55px;
+    height: 55px;
+    z-index: 100;
+    animation: preloader 1.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes preloader {
+    to {
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* backend Candidate border */
+.border-candidate {
+    border-top: .3rem solid #0F6EFD;
+    border-bottom: .3rem solid #0F6EFD;
+    border-radius: 18px;
+}
+/* backend Opportunities border */
+.border-oppo {
+    border-top: .3rem solid #198753;
+    border-bottom: .3rem solid #198753;
+    border-radius: 18px;
+}
+/* backendCountdown border */
+.border-timer {
+    border-top: .3rem solid #DC3544;
+    border-bottom: .3rem solid #DC3544;
+    border-radius: 18px;
+}
+/* backend notepad border */
+.border-notepad {
+    border-top: .3rem solid #FDC105;
+    border-bottom: .3rem solid #FDC105;
+    border-radius: 18px;
+}
+
+/* backend Create Vacancies border */
+.border-create-vacancy  {
+    border-top: .3rem solid #f2f5f6;
+    border-bottom: .3rem solid #f2f5f6;
+    border-radius: 18px;
+}
+/* Vacancies list border */
+.border-vacancy {
+    border-top: .3rem solid #31D2F2;
+    border-bottom: .3rem solid #31d2f2;
+    border-radius: 18px;
+}
+/* job opportunities and  backend Create Vacancies border */
+.border-disabled  {
+    border-top: .3rem solid #f2f5f6;
+    border-bottom: .3rem solid #f2f5f6;
+    border-radius: 18px;
+}
+
+/* Modal border */
+.border-modal {
+    background-color:rgba(18, 19, 18, 0.80);
+    border-top: .3rem solid #31D2F2;
+    border-bottom: .3rem solid #31d2f2;
+    border-radius: 18px;
+}
+.border-modal-alert {
+    background-color:rgba(18, 19, 18, 0.80);
+    border-top: .3rem solid #DC3544;
+    border-bottom: .3rem solid #DC3544;
+    border-radius: 18px;
+}
+
+.modal-header .btn-close {
+    background-color: rgba(246, 242, 242, 0.8);
+  }
+/* ---------------------------------- 
+# SPINNER BACKEND (AJAX)
+---------------------------------- */
+#spinner_screen {
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: none;
+    background: rgba(117, 25, 255, 0.35);
+}
+
+#spinner_position {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#spinner {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 6px #c0cbcd solid;
+    border-top: 6px #31D2F2 solid;
+    animation: load_anim 1s infinite linear;
+}
+@keyframes load_anim {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ----------------------------------
+# CUSTOM SWEETALERT
+----------------------------------*/
+/* All texts centered */
+.swal-text {
+    text-align: center;
+}
+
+/* Icon settings */
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners {
+    background: none !important;
+}
+/* color of ring */
+.swal-icon--success{
+    border-color: #31D2F2;
+}
+
+/* Animation */
+.swal-icon--success__line {
+    background-color: #31D2F2;
+}
+
+/* Button settings */
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 5px;
+    background-color: #31D2F2;
+    font-size: 12px;
+    border: 1px solid #31D2F2;
+}
+
+.swal-button:focus{
+    box-shadow: none;
+}
+
+/* hover */
+.swal-button:not([ disabled]):hover {
+    background: transparent;
+    color: #31D2F2;
+    border: 1px solid #31D2F2;
+}
+
+/* ---------------------------------- 
+# RESPONSIVE
+---------------------------------- */
+/* for tablets */
+@media(max-width: 1024px) {
+    #footer {
+        font-size: 17px;
+    }
+ /* space between cards in  opportunities-info.html */
+    .move_tablet {
+        margin-top: 15px;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+    #footer {
+        font-size: 13px;
+    }
+    /* Vertical scroll */
+    body {
+        overflow-y: visible;
+    }
+    /* left navbar */
+    #navbar-main {
+        font-size: 17px;
+        margin-left: 16px;
+    }
+    
+    #text_anim2 {
+        font-size: 15px;
+    }
+    
+    .typed-effect {
+        font-size: 22px;
+    }
+    .typed-effect2 {
+        font-size: 17px;
+        
+    }
+    /* Btn Job opportunities (home.html) */
+    #btn-job {
+        font-size: 13px;
+        width: 175px;
+    }
+    .card_font {
+        font-size: 13px;
+    }
+    #title-card {
+        font-size: 12px;
+    }
+    #nav-right {
+        font-size: 20px;
+        margin-right: 16px;
+    }
+    #login-card {
+        width: 90%;
+    }
+    /* logout text in modal */
+    .logout_text {
+        font-size: 14px;
+    }
+    #message_modal_dialog {
+        left: 10px;
+        bottom: 45px;
+        width: 90%;
+    }
+    /* set all text small */
+    .small_text{
+        font-size:12px;
+    }
+    .mid_text {
+        font-size:13px;
+    }
+    .lg_text {
+        font-size:14px;
+    }
+    /* message button */
+    .message_btn {
+        height: 40px;
+        width: 40px;
+        right: 15px;
+        bottom: 70px;
+    }
+    /* Countdown */
+    #timer {
+        font-size: 15px;
+    }
+    /* support, backend and wait-list title */
+    #card-title-size{
+        font-size: 15px;
+    }
+    /* Button inside the modals popup */
+    .cancel_button, .send_button, .modal_button {
+        font-size: 12px;
+        width: 55px;
+    }
+    .title-modal{
+        font-size: 15px;
+    }
+    /* Frontend countdown */
+    #ticking {
+        font-size: 15px;
+    }
+    /* Modal input to insert the number of job openings */
+    #input_backend_job {
+        font-size: 13px;
+    }
+    /* candidates total number in backend modal */
+    #candidate_number {
+        font-size: 50px;
+    }
+    /* duplicated modal title */
+    .msg_duplicate{
+        font-size: 15px;
+    }
+
+    .notepad_date_title{
+        font-size: 13px;
+    }
+
+    #no_wait_list, #support_ban {
+        font-size: 12px;
+    }
+
+    .error_404{
+        font-size: 45px
+    }
+    
+    .modal-header .btn-close {
+        font-size: 8px;
+        margin-bottom: 6px;
+    }
+}
+
+

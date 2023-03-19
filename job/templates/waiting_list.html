@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+<!-- Block Title (browser tab) -->
+{% block title %} Wait-list {% endblock title %}
+
+<!--No waiting list showing up when time is over -->
+{% block time_over %}{% endblock %}
+
+{% block bg-image %}
+<style>
+    body {
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url("/static/img/frontend_bg.jpg");
+        background-position: center 0px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+<!--Navbar-->
+{% block navbar-main %}
+<i class="fas fa-business-time text-info"></i>&nbsp;&nbsp; Wait-list
+{% endblock navbar-main %}
+
+<!--Sidebar-->
+{% block sidebar %}
+<a href="{% url 'home' %}" class="btn btn-outline-info">Home</a>
+{% endblock sidebar %}
+
+<!--Page content-->
+{% block content-main %}
+<div class="container mt-4" style="width: 95%; ">
+    <div id="wait_list" style="display: none;">
+        <h4 class="btn btn-lg btn-outline-info mb-2" id="card-title-size" style="width: 100%; cursor:default;">
+            <i class="fas fa-user-clock"></i>&nbsp;&nbsp; Waiting list
+        </h4>
+        <div class="card p-2 " style="background-color:rgba(15, 3, 33, 0.55);">
+            <form method="POST" action="/waiting_list" class="was-validated" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                <select class="form-select mt-2 small_text" name="post" required>
+                    <option value="" hidden>Select the post</option>
+                    <option disabled></option>
+                    <option>Frontend</option>
+                    <option>Backend</option>
+                    <option>Fullstack</option>
+                    <option>Intern</option>
+                </select>
+                <div class="input-group mb-2 mt-2 ">
+                    <input type="email" name="email" class="form-control small_text" placeholder="Your email" maxlength="75" required>
+                </div>
+                <div class="input-group mb-2 mt-2">
+                    <input class="form-control small_text" type="file" id="file_waiting" name="document" required
+                        accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                </div>
+                <div class="form-text text-light" style="font-size: 13px;">* Allowed extensions: pdf - doc - docx</div>
+                <hr>
+                <div class="mb-2">
+                    <textarea class="form-control is-valid small_text" rows="5" name="message" placeholder="Tell us a bit about yourself..." maxlength="400" required></textarea>
+                </div>
+                <div class="mt-5" style="width:100%;">
+                    <button type="submit" class="btn btn-outline-info mb-2 small_text">
+                        Submit &nbsp;&nbsp;
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <a href="{% url 'home' %}" class="btn btn-outline-danger mb-2 ms-2 small_text" title="Exit">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!--END CONTAINER-->
+
+<!-- Get the remaining timer in backend-->
+{% for countdown in show_countdowns %}
+<span id="ticking" class="text-center" style="display: none;">{{ countdown.timer|date:"M d, Y H:i:s" }}</span>
+{% endfor %}
+<!--waiting list hide-->
+<div class="text-center" id="no_wait_list" style="display: none;">
+    <i class="text-light fas fa-exclamation-triangle fa-10x"></i>
+    <h3 class="mt-3 text-light">Waiting List inaccessible</h3>
+</div>
+<br>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'modals/backend/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="showCountdownModal{{ countdown.id }}" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-danger fas fa-clock"></i>&nbsp;&nbsp; Countdown {% endblock %}
+
+<!--Notepad Form -->
+{% block form-notepad %}
+<!--outline color input -->
+{% block input-outline-color %}
+<style>
+    #timer:focus {
+        box-shadow: 0 0 9px rgba(161, 12, 22, 0.739) !important;
+    }
+</style>
+{% endblock  %}
+<form action="/countdown" method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="modal-body">
+        <span class="card p-2 bg-danger text-light text-center mb-3 lg_text" style="width: 100%;">
+        Timer for vacant positions
+        </span>
+        <input type="hidden" name="id" value="{{ countdown.id }}" readonly />
+
+        <div class="input-group mb-1">
+            <input type="datetime-local" class="form-control text-danger text-center border-light" id="timer" name="timer" value="{{ countdown.timer}}" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm modal_button" data-bs-dismiss="modal"> Close </button>
+        <button type="submit" class="btn btn-outline-danger btn-sm modal_button" id="btn_timer">Save </button>
+    </div>
+</form>
+{% endblock form-notepad %}

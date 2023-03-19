@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+<!-- Block Title (browser tab) -->
+{% block title %}  Position Description {% endblock title %}
+
+<!-- Navbar content -->
+{% block navbar-main %}
+<i class="fas fa-project-diagram text-info"></i>&nbsp;&nbsp;Description
+<a class="text-info typed-effect2 text-decoration-none">We <span class="text-light" id="text_anim4"></span></a>
+{% endblock navbar-main %}
+
+<!--Sidebar-->
+{% block sidebar %}
+<a href="{% url 'home' %}" class="btn btn-outline-info">Home</a>
+<hr>
+<a data-bs-toggle="modal" data-bs-target="#supportModalPopup" class="btn btn-outline-warning">
+    <i class="fas fa-headset"></i>&nbsp;&nbsp; Support
+</a>
+{% endblock sidebar %}
+
+
+{% block content-main %}
+{% for job in jobOpenings %}
+{% if job.frontend == '0' and vacancy.dataTarget == 'frontendModal' %}
+{% elif job.backend == '0' and vacancy.dataTarget == 'backendModal' %}
+{% elif job.fullstack == '0' and vacancy.dataTarget == 'fullstackModal' %}
+{% elif job.intern == '0' and vacancy.dataTarget == 'internModal' %}
+{% else %}
+<div class="container p-3 mt-3 " id="disabled_description" style="background-color:rgba(117, 25, 255, 0.35); width: 85%;">
+    <div class="card p-3 mt-3 mb-3 rounded-bottom  border-vacancy shadow" style="background-color:rgba(250, 250, 250, 0.85); ">
+        <div class="d-flex flex-column align-items-center" >
+            <div>
+                <p class="fw-bolder small_text">Position Description</p>
+            </div>
+            <div class="d-flex flex-column ">
+                <div class="d-flex flex-sm-row flex-column justify-content-between mb-2 align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <h5 class="mt-1 small_text text-uppercase me-3" >{{ vacancy.title }} </h5>
+                        <span class="mb-1 small_text vacancies_title">({{ dataTarget }})</span>
+                    </div>
+                   
+                    <button class="btn btn-info btn-sm small_text rounded-pill mb-1 " data-bs-toggle="modal" data-bs-target="#{{ vacancy.dataTarget }}" >
+                        Apply Now
+                    </button>
+                    
+                </div>
+                <p class="fw-light small_text " >{{ vacancy.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %} 
+{% endfor %} <!--END JOBOPENINGS-->
+<br><br><br>
+<!-- Ajax Spinner (backend) -->
+<div id="spinner_screen">
+    <div id="spinner_position">
+        <span id="spinner"></span>
+    </div>
+</div>
+<!-- Typed JS Effect -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+    var typed4 = new Typed('#text_anim4', {
+
+        strings: [
+            'are the future',
+            'are Designer',
+            'are Developer',
+            'are Creative'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+    });
+</script>
+{% endblock %}

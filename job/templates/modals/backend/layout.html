@@ -1,0 +1,19 @@
+<div class="modal fade" {% block id-modal %} {% endblock %} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="title-modal" id="exampleModalLabel"> {% block title-modal %}{% endblock %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% block form-notepad %}
+            <div class="modal-body text-center">
+                {% block modal-body %} {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm modal_button" data-bs-dismiss="modal">Close</button>
+                {% block btn-action %} {% endblock %}
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>

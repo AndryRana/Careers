@@ -1,0 +1,22 @@
+{% extends 'modals/forms/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="fullstackModal" {% endblock %}
+<!--===Modal Title===-->
+{% block title-modal %} Fullstack job{% endblock %}
+
+<!-- Form Action -->
+{% block action %} action="/fullstack_email" {% endblock action %}
+
+<!-- Form Validation -->
+{% block validation %} onsubmit="return fullstack_form_valid()" {% endblock validation %}
+
+<!-- ==================== INPUT ID ==================== -->
+{% block id-name %} id="name_fullstack" {% endblock id-name %} 
+{% block id-age %} id="age_fullstack" {% endblock id-age %} 
+{% block id-email %} id="email_fullstack" {% endblock id-email %} 
+{% block id-phone %} id="phone_fullstack" {% endblock id-phone %} 
+{% block id-address %} id="address_fullstack" {% endblock id-address %} 
+{% block id-experience %} id="experience_fullstack" {% endblock id-experience %}
+ {% block id-skills %} id="skills_fullstack" {% endblock id-skills %}
+ {% block id-file %} id="file_fullstack" {% endblock id-file %}

@@ -1,0 +1,20 @@
+{% extends "modals/various/layout.html" %}
+
+<!-- Modal ID-->
+{% block id-modal %} id="logout" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="fas fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp; Logout
+{% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<span class="text-warning mid_text"><i class="fas fa-solid fa-right-from-bracket fa-3x"></i></span>
+<div class="text-warning mt-3 logout_text">Click on Logout to exit</div>
+{% endblock %}
+
+<!--Action btn-->
+{% block btn-action %}
+<a href="{% url 'logout'%}" class="btn btn-outline-warning btn-sm modal_button">Logout</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'modals/backend/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="CandidateNumberModal" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-primary fas fa-user-alt"></i>&nbsp;&nbsp; The total number of
+Candidates {% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<h1 id="candidate_number" class="text-primary text-center" >
+  {{ total_number }}
+</h1>
+{% endblock %}

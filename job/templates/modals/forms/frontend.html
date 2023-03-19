@@ -1,0 +1,23 @@
+{% extends 'modals/forms/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="frontendModal" {% endblock %}
+
+<!--===Modal Title===-->
+{% block title-modal %} Frontend job {% endblock %}
+
+<!-- Form Action -->
+{% block action %} action="/frontend_email" {% endblock action %}
+
+<!-- Form Validation -->
+{% block validation %} onsubmit="return frontend_form_valid()" {% endblock validation %}
+
+<!-- ==================== INPUT ID ==================== -->
+{% block id-name %} id="name_frontend" {% endblock id-name %} 
+{% block id-age %} id="age_frontend" {% endblock id-age %}
+{% block id-email %} id="email_frontend" {% endblock id-email %} 
+{% block id-phone %} id="phone_frontend" {% endblock id-phone %}
+ {% block id-address %} id="address_frontend" {% endblock id-address %} 
+ {% block id-experience %} id="experience_frontend" {% endblock id-experience %} 
+ {% block id-skills %} id="skills_frontend" {% endblock id-skills %} 
+ {% block id-file %} id="file_frontend" {% endblock id-file %}

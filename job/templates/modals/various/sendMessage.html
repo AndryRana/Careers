@@ -1,0 +1,31 @@
+{% extends "modals/various/layout.html" %}
+
+<!-- Modal ID-->
+{% block id-modal %} id="sendMessageModal" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-info fas fa-envelope"></i>&nbsp;&nbsp; Send Message
+{% endblock %}
+
+<!--message id for css-->
+{% block id-cssMessage %} id="message_modal_dialog" {% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<form action="/send_message" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <textarea name="message" rows="15" class="form-control small_text" maxlength="1000"
+            placeholder="Enter your message..." required></textarea>
+    </div>
+    <div class="d-grid gap-2 mb-2 mt-2">
+        <button class="btn btn-outline-info small_text" type="submit">
+            <i class="far fa-comment-alt"></i>&nbsp;&nbsp; Send message
+        </button>
+    </div>
+</form>
+{% endblock %}
+
+<!--no footer-->
+{% block footer %} {% endblock %}

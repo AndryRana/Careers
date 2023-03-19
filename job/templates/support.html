@@ -1,0 +1,149 @@
+{% extends "layout.html" %}
+
+<!-- Block Title (browser tab) -->
+{% block title %} Support {% endblock title %}
+
+<!--No waiting list showing up when time is over -->
+{% block time_over %}{% endblock %}
+
+{% block bg-image %}
+<style>
+    body {
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url("/static/img/support_bg.jpg");
+        background-position: center 0px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+<!--Navbar-->
+{% block navbar-main %}
+<i class="fas fa-headset text-info"></i>&nbsp;&nbsp; Support
+{% endblock navbar-main %}
+
+<!--Sidebar-->
+{% block sidebar %}
+<a href="{% url 'home' %}" class="btn btn-outline-info">Home</a>
+{% if user.is.authenticated %}
+    {% if request.user.is_superuser %}
+    {%  else %}
+    <a href="{% url 'backend' %}" class="btn btn-outline-dark">Backend</a>
+    {% endif %}
+{% endif %}
+{% endblock sidebar %}
+
+<!--Page content-->
+{% block content-main %}
+{% for job in jobOpenings %}
+{% for countdown in show_countdowns %}
+{% if request.user.is_superuser %}
+<div class="text-center text-info small_text" id="support_ban">
+    <span class="fa-stack fa-7x">
+        <i class="fas fa-map-marker fa-stack-2x"></i>
+        <i class="text-dark fas fa-ban fa-stack-1x fa-inverse"></i>
+    </span>
+    <h1 class="text-center text-light mt-3 mb-4 error_404">404</h1>
+</div>
+{% else %}
+<div class="container mt-4" style="width: 95%; ">
+    <h4 class="btn btn-lg btn-outline-info mb-2" id="card-title-size" style="width: 100%; cursor:default;">
+        <i class="fas fa-solid fa-gear"></i>&nbsp;&nbsp; Support
+    </h4>
+    <div class="card p-2 " style="background-color:rgba(15, 3, 33, 0.55);">
+        <form method="post" class="was-validated small_text" autocomplete="off">
+            {% csrf_token %}
+            <div class="mb-2">
+                <textarea name="message" maxlength="1200" rows="5" class="form-control small_text"
+                    placeholder="Write your request here ..." required></textarea>
+                <div class="invalid-feedback">Please be more specific</div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" value="True" name="terms" id="check_validation" required>
+                <label class="form-check-label text-light" for="check_validation">I confirm my responsibility</label>
+                <div class="invalid-feedback">You will take responsability</div>
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="mb-3">
+                <select name="person" class="form-select" onchange="optionCheck()" id="optionChoice" required >
+                    <option value="Employee">Employee</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <select name="option" class="form-select small_text" id="relatedOption" required >
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            
+            {% else %}
+            <div class="mb-3">
+                <select name="person" class="form-select small_text" onchange="optionCheck()" id="optionChoice" required >
+                    <option value="">Tell us about you?</option>
+                    <option disabled></option>
+                    <option value="Employee">Employee</option>
+                    {% if job.frontend == '0' and job.backend == '0' and job.fullstack == '0' and job.intern == '0' %}
+                    <option value="Candidate" disabled>Candidate</option>
+                    {% else %}
+                    <option value="Candidate">Candidate</option>
+                    {% endif %}
+                </select>
+                <div class="invalid-feedback">Please enter only a single topic</div>
+            </div>
+
+            <div class="mb-3">
+                <select name="option" class="form-select small_text" id="relatedOption" required >
+                    <option value="">Select your subject</option>
+                    <option disabled></option>
+                    <option value="I forgot my Password">I forgot my Password</option>
+                    <option value="I forgot my account">I forgot my account</option>
+                    <option value="Wanted to update my resume">Wanted to update my resume</option>
+                    <option value="Others">Others</option>
+                </select>
+                <div class="invalid-feedback">Please enter only a single topic</div>
+            </div>
+
+            {% endif %}
+            {% if user.is_authenticated %}
+            <div class="mb-4">
+                <input type="email" name="email" maxlength="60" class="form-control small_text" value="{{ user.email }}">
+            </div>
+            {% else %}
+            <div class="mb-4">
+                <input type="email" name="email" maxlength="50" class="form-control small_text" placeholder="Email" required>
+            </div>
+            {% endif %}
+            <hr>
+            <div class="mt-5" style="width:100%;">
+                <button type="submit" class="btn btn-outline-info mb-2 small_text">
+                    Submit &nbsp;&nbsp;
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <a href="{% url 'home' %}" class="btn btn-outline-danger mb-2 ms-2 small_text" title="Exit">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div><!--END CONTAINER-->
+{% endif %} <!-- END // If superuser -->
+{% endfor %} <!-- END // for show_countdowns -->
+{% endfor %} <!-- END // for jobOpenings -->
+
+{% for message in messages %}
+    {% if message.tags == 'warning' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var mess = "{{ message }}";
+        swal("Access denied!", mess, "error");
+    </script>
+    {% endif %}
+{% endfor %}
+
+<!-- No bootstrap modal warning alert-->
+{% block support_modal_duplicated %}{% endblock  %}
+
+{% endblock %}

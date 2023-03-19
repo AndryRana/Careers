@@ -1,0 +1,224 @@
+{% extends 'layout.html' %}
+
+<!-- Block Title (browser tab) -->
+{% block title %} Jobs {% endblock title %}
+
+<!-- Navbar content -->
+{% block navbar-main %}
+<i class="fas fa-project-diagram text-info"></i>&nbsp;&nbsp; Jobs
+<a class="text-info typed-effect2 text-decoration-none">We <span class="text-light" id="text_anim3"></span></a>
+{% endblock navbar-main %}
+
+<!-- Link to navigate between the pages -->
+{% block link %}
+<a href="{% url 'home' %}" id="nav-right" title="Go back">
+    <i class="text-info fas fa-long-arrow-left" ></i>
+</a>
+{% endblock link %}
+
+<!-- Page content -->
+{% block content-main %}
+{% for job in jobOpenings %}
+<div class="container mt-4 rounded " style="width: 80%;">
+    <div class="justify-content-center align-items-center row">
+        <h6 class="btn btn-info" id="title-card" style="cursor: default; width: 100%; ">
+            <strong>JOB OPPORTUNITIES</strong>
+        </h6>
+        <div class="shadow-lg card p-3 mt-3" style="background-color:rgba(117, 25, 255, 0.35);">
+            <div class="row">
+                <!-- First button -->
+                <div class="col-xl-3 col-sm-6 p-1">
+                    <div class="card " style="background-color: transparent;">
+                        {% if job.frontend == '0' %}
+                        <button class="btn btn-outline-light btn-lg card_font border-disabled" disabled>
+                        {% else %}
+                        <button class="btn btn-outline-info btn-lg card_font border-vacancy disabled_btn" data-bs-toggle="modal" data-bs-target="#frontendModal">
+                        {% endif %}
+                            <i class="fas fa-4x fa-brands fa-js"></i>
+                            <br><br>Frontend
+                        </button>
+                    </div>
+                </div>
+                <!-- Second button -->
+                <div class="col-xl-3 col-sm-6 p-1">
+                    <div class="card " style="background-color: transparent;">
+                        {% if job.backend == '0' %}
+                        <button class="btn btn-outline-light btn-lg card_font border-disabled" disabled>
+                        {% else %}
+                        <button class="btn btn-outline-info btn-lg card_font border-vacancy disabled_btn" data-bs-toggle="modal" data-bs-target="#backendModal">
+                        {% endif %}
+                            <i class="fas fa-4x fa-brands fa-java"></i>
+                            <br><br>Backend
+                        </button>
+                    </div>
+                </div>
+                <!-- Third button -->
+                <div class="col-xl-3 col-sm-6 p-1">
+                    <div class="card " style="background-color: transparent;">
+                        {% if job.fullstack == '0' %}
+                        <button class="btn btn-outline-light btn-lg card_font border-disabled" disabled>
+                        {% else %}
+                        <button class="btn btn-outline-info btn-lg card_font border-vacancy  disabled_btn" data-bs-toggle="modal" data-bs-target="#fullstackModal">
+                        {% endif %}
+                            <i class="fab fa-node fa-4x"></i>
+                            <br><br>Fullstack
+                        </button>
+                    </div>
+                </div>
+                <!-- Fourth button -->
+                <div class="col-xl-3 col-sm-6 p-1">
+                    <div class="card " style="background-color: transparent;">
+                        {% if job.intern == '0' %}
+                        <button class="btn btn-outline-light btn-lg card_font border-disabled" disabled>
+                        {% else %}
+                        <button class="btn btn-outline-info btn-lg card_font border-vacancy  disabled_btn" data-bs-toggle="modal" data-bs-target="#internModal" >
+                        {% endif %}
+                            <i class="fas fa-4x fa-sharp fa-regular fa-folder"></i>
+                            <br><br>Intern
+                        </button>
+                    </div>
+                </div>
+            </div>
+           
+            {% for vacancy in page_vacancies %}
+            {% if job.frontend == '0' and vacancy.dataTarget == 'frontendModal' %}
+            {% elif job.backend == '0' and vacancy.dataTarget == 'backendModal' %}
+            {% elif job.fullstack == '0' and vacancy.dataTarget == 'fullstackModal' %}
+            {% elif job.intern == '0' and vacancy.dataTarget == 'internModal' %}
+            {% else %}
+            <div class="card p-4 mt-4 mb-1 rounded-bottom shadow border-vacancy" id="disabled_description" style="background-color:rgba(242, 246, 246, 0.85);" >
+                <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center" >
+                    <div class="d-flex align-items-center">
+                        <h5 class="mt-1 me-2 small_text  text-uppercase" >{{ vacancy.title }}</h5> 
+                        {% if vacancy.dataTarget == "frontendModal" %}
+                        <span class="mb-1 fw-light small_text ">(Frontend)</span>
+                        {% elif vacancy.dataTarget == "backendModal" %}
+                        <span class="mb-1 fw-light small_text ">(Backend)</span>
+                        {% elif vacancy.dataTarget == "fullstackModal" %}
+                        <span class="mb-1 fw-light small_text ">(Fullstack)</span>
+                        {% elif vacancy.dataTarget == "internModal" %}
+                        <span class="mb-1 fw-light small_text ">(Intern)</span>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'description' vacancy.id %}" class="btn btn-info btn-md small_text rounded-pill" >
+                        Apply Now
+                    </a> 
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!--PAGINATION--> 
+    {% if job.frontend == '0' and job.backend == '0' and job.fullstack == '0' and job.intern == '0' %}
+    {% else %}
+    <div class="row justify-content-end" id="disabled_description" >
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_vacancies.has_previous %}
+                <li class="page-item my-1 py-2 px-1 "><a class="page-link bg-info small_text" href="?page={{ page_vacancies.previous_page_number }}">Previous</a></li>
+                {% else %}
+                <li class="page-item disabled my-1 py-2 px-1 ">
+                    <a href="#" class="page-link small_text " tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in page_vacancies.paginator.page_range %}
+                {% if page_vacancies.number == num %}
+                <li class="page-item active my-1 py-2 px-1 " aris-current="page">
+                    <span class="page-link bg-info small_text">
+                        {{ num }}
+                        <span class="sr-only"></span>
+                    </span>
+                </li>
+                {% else %}
+                <li class="page-item my-1 py-2 px-1 "><a class="page-link small_text " href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if page_vacancies.has_next %}
+                <li class="page-item my-1 py-2 px-1"><a class="page-link bg-info small_text" href="?page={{ page_vacancies.next_page_number }}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled my-1 py-2 px-1 ">
+                    <a href="#" class="page-link small_text " tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+{% endfor %}
+</div> <!-- END // container -->
+<!-- <div class="container rounded p-3 mt-3" style="background-color:rgba(242, 246, 246, 0.85);">
+</div> -->
+
+<!-- Ajax Spinner (backend) -->
+<div id="spinner_screen">
+    <div id="spinner_position">
+        <span id="spinner"></span>
+    </div>
+</div>
+<!--opportunities information-->
+<div>
+    <button class="btn btn-info text-light message_btn small_text" data-bs-toggle="modal" data-bs-target="#opportunitiesInfoModal">
+        <i class="fas fa-question fa-2x"></i>
+    </button>
+</div>
+
+{% for job in jobOpenings %}
+    <!-- ======All positions====== -->
+    {% if job.frontend == '0' and job.backend == '0' and job.fullstack == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#all_closed"></button>
+    
+    <!-- ======Three positions====== -->
+    {% elif job.frontend == '0' and job.backend == '0' and job.fullstack == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_back_full_closed"></button>
+    {% elif job.frontend == '0' and job.backend == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_back_intern_closed"></button>
+    {% elif job.frontend == '0' and job.fullstack == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_full_intern_closed"></button>
+    {% elif job.backend == '0' and job.fullstack == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#back_full_intern_closed"></button>
+
+    <!-- ======two positions====== -->
+    {% elif job.frontend == '0' and job.backend == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_back_closed"></button>
+    {% elif job.frontend == '0' and job.fullstack == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_full_closed"></button>
+    {% elif job.frontend == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#front_intern_closed"></button>
+    {% elif job.backend == '0' and job.fullstack == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#back_full_closed"></button>
+    {% elif job.backend == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#back_intern_closed"></button>
+    {% elif job.fullstack == '0' and job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#full_Intern_closed"></button>
+
+    <!-- ======one position====== -->
+    {% elif job.frontend == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#frontend_closed"></button>
+    {% elif job.backend == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#backend_closed"></button>
+    {% elif job.fullstack == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#fullstack_closed"></button>
+    {% elif job.intern == '0' %}
+    <button id="closed_job_modal" data-bs-toggle="modal" data-bs-target="#intern_closed"></button>
+    {% endif %}
+{% endfor %}
+<br><br><br>
+<!-- Typed JS Effect -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+    var typed3 = new Typed('#text_anim3', {
+
+        strings: [
+            'are the future',
+            'are Designer',
+            'are Developer',
+            'are Creative'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+    });
+</script>
+{% endblock %}

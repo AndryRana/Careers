@@ -1,0 +1,70 @@
+<div class="modal fade close-modal" {% block id-modal %}{% endblock  %} tabindex="-1" aria-labelledby="dafaultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-modal text-light">
+            <div class="modal-header">
+                <h5 class="title-modal" id="defaultModalLabel"><i class="fas fa-project-diagram"></i>&nbsp;&nbsp; {% block title-modal %}{% endblock %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" {% block action %}{% endblock action %} {% block validation %} {% endblock validation %} enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input type="hidden" name="vacancy_title" value="{{ vacancy.title }}" readonly>
+                    <div class="input-group input-group-sm mb-2">
+                        <button class="label_icon btn border-info bg-light">
+                            <i class="text-info fas fa-solid fa-user "></i>
+                        </button>
+                        <input type="text" class="form-control name" maxlength="50"  {% block id-name %} {% endblock id-name %} name="name" placeholder="Full name">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <button class="label_icon btn border-info bg-light">
+                            <i class="text-info fas fa-fingerprint"></i>
+                        </button>
+                        <input type="text" class="form-control age" maxlength="2" {% block id-age %} {% endblock id-age %} name="age" placeholder="Your age">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <button class="label_icon btn border-info bg-light">
+                            <i class="text-info fas fa-envelope"></i>
+                        </button>
+                        <input type="text" class="form-control email" maxlength="40" {% block id-email %} {% endblock id-email %} name="email" placeholder="Your email">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <button class="label_icon btn border-info bg-light">
+                            <i class="text-info fas fa-phone"></i>
+                        </button>
+                        <input type="text" class="form-control phone" {% block id-phone %} {% endblock id-phone %} name="phone" placeholder="Your phone">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <button class="label_icon btn border-info bg-light">
+                            <i class="text-info fas fa-solid fa-location-crosshairs"></i>
+                        </button>
+                        <input type="text" class="form-control" maxlength="60" {% block id-address %} {% endblock id-address %} name="address" placeholder="Your address">
+                    </div>
+
+                    <div class="mb-2 mt-3">
+                        <textarea class="form-control small_text" maxlength="600" {% block id-experience %} {% endblock id-experience %} name="experience" rows="3" placeholder="Your experiences..."></textarea>
+                    </div>
+
+                    <div class="mb-2 mt-3">
+                        <textarea class="form-control small_text" maxlength="600" {% block id-skills %} {% endblock id-skills %} name="skills" rows="3" placeholder="Your skills..."></textarea>
+                    </div>
+
+                    <hr style="height: 2px;">
+                    <div class="mb-3">
+                        <div class="mb-3" style="font-size: 14px;"><i class="text-info fas fa-solid fa-upload"></i>&nbsp;&nbsp; Upload your resume</div>
+                        <input type="file" class="form-control form-control-sm" name="file" {% block id-file %} {% endblock id-file %}
+                               accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                        <div class="form-text text-light" style="font-size: 12px;">* Allowed extensions: pdf - doc - docx</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light btn-sm cancel_button" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-info btn-sm send_button">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

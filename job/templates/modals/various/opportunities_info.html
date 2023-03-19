@@ -1,0 +1,56 @@
+{% extends "modals/various/layout.html" %}
+
+<!-- Modal ID-->
+{% block id-modal %} id="opportunitiesInfoModal" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="fas fa-solid fa-right-from-bracket text-info"></i>&nbsp;&nbsp; About Jobs
+{% endblock %}
+
+<!-- Modal Body-->
+{% block modal-body %}
+<h5 class="card p-2 border-info text-dark mid_text">Number of open position</h5>
+{% for job in jobOpenings %}
+<div class="justify-content-between mt-2 mb-2">
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 col-6">
+            <button class="btn btn-outline-info mb-2 btn-lg" style="cursor: default; width:100%; " >
+                <i class="fas fa-brands fa-js fa-3x"></i>
+                <br><span style="font-size: 13px">Frontend</span>
+            </button>
+            <span class="small_text disabled_qty">{{ job.frontend }}</span>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-6">
+            <button class="btn btn-outline-info mb-2 btn-lg" style="cursor: default; width:100%; ">
+                <i class="fab fa-brand fa-java fa-3x"></i>
+                <br><span style="font-size: 13px">Backend</span>
+            </button>
+            <span class="small_text disabled_qty">{{ job.backend }}</span>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-6 move_tablet">
+            <button class="btn btn-outline-info mb-2 btn-lg" style="cursor: default; width:100%;">
+                <i class="fab fa-node fa-3x"></i>
+                <br><span style="font-size: 13px">Fullstack</span>
+            </button>
+            <span class="small_text disabled_qty">{{ job.fullstack }}</span>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-6 move_tablet">
+            <button class="btn btn-outline-info mb-2 btn-lg" style="cursor: default; width:100%;">
+                <i class="fas fa-sharp fa-regular fa-folder fa-3x"></i>
+                <br><span style="font-size: 13px">Intern</span>
+            </button>
+            <span class="small_text disabled_qty">{{ job.intern }}</span>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<hr>
+{% for countdown in show_countdowns %}
+<div class="mt-3 mb-3 d-flex flex-column">
+    <h6 class="card p-2 mb-3 text-dark bg-warning mid_text">Positions will be closed in:</h6>
+    <p class="text_last_day mid_text mb-2" id="notification"></p>
+    <span id="ticking" class="text-center" >{{ countdown.timer|date:"M d, Y H:i:s" }}</span>
+</div>
+{% endfor %}
+{% endblock %}

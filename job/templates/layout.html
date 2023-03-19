@@ -1,0 +1,485 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link  href={% static "img/favicon.ico" %} rel="shortcut icon" type="image/png">
+    <!-- Logo -->
+    <!-- <link href="{% static "img/logo_bg.ico" %}" rel="shortcut icon" type="image/png"> -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Static CSS -->
+    <link href={% static "css/style.css" %} rel="stylesheet">
+    <title>{% block title %} IT Careers {% endblock title %}</title>
+</head>
+<body onunload=''>
+    <!-- Sidebar-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style= "background-color:transparent;">
+        <div class="offcanvas-header" style="background-color:white;">
+            <h5 id="offcanvasRightLabel" >MENU</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" style= "background-color:rgba(18, 19, 18, 0.35);">
+            <div class="d-grid gap-2" >
+                {% block sidebar %}
+                <a href="{% url 'backend' %}" class="btn btn-outline-info">Login</a>
+                <hr>
+                <a data-bs-toggle="modal" data-bs-target="#supportModalPopup" class="btn btn-outline-warning">
+                    <i class="fas fa-headset"></i>&nbsp;&nbsp; Support
+                </a>
+                {% endblock sidebar %}
+            </div>
+        </div>
+    </div>
+    <!--End sidebar-->
+
+    <div class="wrapper">
+        <div id="spinner_loader"></div>
+        {% block bg-image %}
+        <style>
+            body {
+                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url("/static/img/frontend_bg.jpg");
+                background-position: center 0px;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+        </style>
+        {% endblock bg-image %} 
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(117, 25, 255, 0.55);">
+                <div class="col-sm">
+                    <a class="navbar-brand flex-grow-1 text-decoration-none text-light" id="navbar-main">
+                        {% block navbar-main %} 
+                        <i class="fas fa-robot text-info "></i>&nbsp;&nbsp; IT Careers
+                        <a class="text-info typed-effect2 text-decoration-none">We <span class="text-light" id="text_anim2"></span></a>
+                        {% endblock navbar-main %} 
+                    </a>
+                    
+                </div>
+                <!-- Link to navigate between the pages -->
+                {% block link %}
+                    <a href="{% url 'home' %}" id="nav-right" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="text-info fas fa-bars"></i>
+                    </a>
+                {% endblock link %}
+            </nav>
+        </header>
+
+        <!-- ===== Block content (ROOT) ===== -->
+        {% block content-main %}{% endblock %}
+
+         <!-- ==== Includes (modals) ==== -->
+         <!--===============Forms===============-->
+         {% include 'modals/forms/frontend.html' %}
+         {% include 'modals/forms/backend.html' %}
+         {% include 'modals/forms/fullstack.html' %}
+         {% include 'modals/forms/intern.html' %}
+         <!--Message for duplicated request-->
+         {% include 'modals/duplicate_msg/duplicate_resume_modal.html' %}
+         {% include 'modals/duplicate_msg/duplicate_request_modal.html' %}
+         {% include 'modals/duplicate_msg/duplicate_wait_list_modal.html' %}
+         <!-- others Forms -->
+         {% include 'modals/various/logout.html' %}
+         {% include 'modals/various/supportModalPopup.html' %}
+         {% include 'modals/various/opportunities_info.html' %}
+         {% include 'modals/various/sendMessage.html' %}
+         <!--===============Backend===============-->
+         {% include 'modals/backend/candidates.html' %}
+        <!--===============Job Openings closed===============-->
+        <!--=========One position===========-->
+        {% include 'modals/closedPosition/1_position/frontend_closed.html'%}
+        {% include 'modals/closedPosition/1_position/backend_closed.html'%}
+        {% include 'modals/closedPosition/1_position/fullstack_closed.html'%}
+        {% include 'modals/closedPosition/1_position/intern_closed.html'%}
+        
+        <!--=========Two positions===========-->
+        {% include 'modals/closedPosition/2_positions/front_back_closed.html'%}
+        {% include 'modals/closedPosition/2_positions/front_full_closed.html'%}
+        {% include 'modals/closedPosition/2_positions/front_intern_closed.html'%}
+        {% include 'modals/closedPosition/2_positions/full_intern_closed.html'%}
+        {% include 'modals/closedPosition/2_positions/back_full_closed.html'%}
+        {% include 'modals/closedPosition/2_positions/back_intern_closed.html'%}
+        
+        <!--=========Three positions===========-->
+        {% include 'modals/closedPosition/3_positions/back_full_intern_closed.html'%}
+        {% include 'modals/closedPosition/3_positions/front_back_full_closed.html'%}
+        {% include 'modals/closedPosition/3_positions/front_back_intern_closed.html'%}
+        {% include 'modals/closedPosition/3_positions/front_full_intern_closed.html'%}
+
+        <!--=========All positions===========-->
+        {% include 'modals/closedPosition/4_positions/all_closed.html'%}
+        {% include 'modals/closedPosition/4_positions/all_countdown_closed.html'%}
+
+
+    
+    </div> <!--div wrapper-->
+
+    <footer class="text-center text-lg-start" style="color: #fff;" id="footer">
+        <div class="text-center p-3" style="background-color:rgba(117, 25, 255, 0.55);">&copy; {% now "Y" %} Copyright:
+            <a class="text-center text-decoration-none" href="#">
+                <span class="text-info">www.ITCareers.com</span>
+            </a>
+        </div>
+    </footer>
+
+    
+   <!-- Login message from backend -->
+    
+    {% if form.errors %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        swal("Access denied !","Incorrect Username or Password", "error" )
+    </script>
+    {% endif %}
+
+    <!--  all success Message from backend  -->
+    
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var mess = "{{ message }}";
+            swal("Great!", mess, "success");
+        </script>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Bootstrap modal -->
+    <!-- Support Message error for duplicated request and pending -->
+    {% for message in messages %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        {% if message.tags == 'info' %}
+        <script>
+            $(document).ready(function(){
+                $("#duplicate_request_modal").modal('show');
+            })
+        </script>
+
+    <!-- Support Message error for duplicated resume -->
+        {% elif message.tags == 'error' %}
+        <script>
+            $(document).ready(function(){
+                $("#duplicate_resume_modal").modal('show');
+            })
+        </script>
+        
+        {% elif message.tags == 'warning' %}
+            {% block support_modal_duplicated %}
+            <script>
+                $(document).ready(function(){
+                    $("#duplicate_wait_list_modal").modal('show');
+                })
+            </script>
+            {% endblock %}
+        {% endif %}
+    {% endfor %}
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Typed JS Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Inputmask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js" integrity="sha512-zdfH1XdRONkxXKLQxCI2Ak3c9wNymTiPh5cU4OsUavFDATDbUzLR+SYWWz0RkhDmBDT0gNSUe4xrQXx8D89JIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- SweetAlert (freontend validation)-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Static JS-->
+    <script src={% static "js/job.js" %}></script>
+
+    <!-- Typed effect control -->
+     {% block typeEffect %}
+     <script>
+        var typed = new Typed('#text_anim', {
+
+            strings: [
+                'career is here',
+                'IT skills will be valued at our company',
+                'future job will be here',
+                'future will be in your hands'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+        });
+        var typed2 = new Typed('#text_anim2', {
+
+            strings: [
+                'are the future',
+                'are Designer',
+                'are Developer',
+                'are Creative'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+        });
+    </script>
+    {% endblock %}
+
+    <!-- Ajax spinner backend -->
+    <script>
+        jQuery(function(){
+            $(document).ajaxSend(function(){
+                $("#spinner_screen").fadeIn(1000);
+            });
+
+            $(".send_button").click(function(){
+                $.ajax({
+                    type: 'GET',
+                    success: function(data) {
+                        var d = $.parseJSON(data);
+                        alert(d.Test);
+                    }
+                }).done(function() {
+                setTimeout(function() {
+                    $('#spinner_screen').fadeOut(500);
+                }, 700);
+                });
+            });
+        });
+
+        // close modal after clicking on send button
+        $(".send_button").click(function() {
+            var name_frontend = $("#name_frontend").val();
+            var age_frontend = $("#age_frontend").val();
+            var email_frontend = $("#email_frontend").val();
+            var phone_frontend = $("#phone_frontend").val();
+            var address_frontend = $("#address_frontend").val();
+            var experience_frontend = $("#experience_frontend").val();
+            var skills_frontend = $("#skills_frontend").val();
+            var file_frontend = $("#file_frontend").val();
+
+            var name_backend = $("#name_backend").val();
+            var age_backend = $("#age_backend").val();
+            var email_backend = $("#email_backend").val();
+            var phone_backend = $("#phone_backend").val();
+            var address_backend = $("#address_backend").val();
+            var experience_backend = $("#experience_backend").val();
+            var skills_backend = $("#skills_backend").val();
+            var file_backend = $("#file_backend").val();
+
+            var name_fullstack = $("#name_fullstack").val();
+            var age_fullstack = $("#age_fullstack").val();
+            var email_fullstack = $("#email_fullstack").val();
+            var phone_fullstack = $("#phone_fullstack").val();
+            var address_fullstack = $("#address_fullstack").val();
+            var experience_fullstack = $("#experience_fullstack").val();
+            var skills_fullstack = $("#skills_fullstack").val();
+            var file_fullstack = $("#file_fullstack").val();
+
+            var name_intern = $("#name_intern").val();
+            var age_intern = $("#age_intern").val();
+            var email_intern = $("#email_intern").val();
+            var phone_intern = $("#phone_intern").val();
+            var address_intern = $("#address_intern").val();
+            var experience_intern = $("#experience_intern").val();
+            var skills_intern = $("#skills_intern").val();
+            var file_intern = $("#file_intern").val();
+
+            if ((name_frontend != '') && (age_frontend != '') && (email_frontend != '') && (phone_frontend != '')
+            && (address_frontend != '') && (experience_frontend != '') && (skills_frontend != '') && (file_frontend != '')) {
+                $('.close-modal').modal('hide');
+            }
+
+            if ((name_backend != '') && (age_backend != '') && (email_backend != '') &&
+                (phone_backend != '') && (address_backend != '') && (experience_backend != '') && 
+                (skills_backend != '') && (file_backend != '' )) {
+                $('.close-modal').modal('hide');
+            }
+            if ((name_fullstack != '') && (age_fullstack != '') && (email_fullstack != '') &&
+                (phone_fullstack != '') && (address_fullstack != '') && (experience_fullstack != '') && 
+                (skills_fullstack != '') && (file_fullstack != '')) {
+                $('.close-modal').modal('hide');
+            }
+            if ((name_intern != '') && (age_intern != '') && (email_intern != '') &&
+                (phone_intern != '') && (address_intern != '') && (experience_intern != '') && 
+                (skills_intern != '') && (file_intern != '')) {
+                $('.close-modal').modal('hide');
+            }
+        })
+    </script>
+
+    <!-- Clear the form (inside the modal) after closing the modal-->
+    <script>
+        $("#frontendModal, #backendModal, #fullstackModal, #internModal, #vacancyModal").on('hidden.bs.modal', function() {
+            $('#frontendModal form')[0].reset();
+            $('#backendModal form')[0].reset();
+            $('#fullstackModal form')[0].reset();
+            $('#internModal form')[0].reset();
+            $('#vacancyModal form')[0].reset();
+        });
+    </script>
+    
+    <!-- SUPPORT : Options disable/enable -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectPerson = document.querySelector('select[name="person"]');
+            selectPerson.addEventListener('change', function() {
+              var selectOption = document.querySelector('select[name="option"]');
+              // for employee => disable "Wanted to update my resume"
+              selectOption.querySelector('option[value="Wanted to update my resume"]').disabled = (selectPerson.value == 'Employee');
+              // for candidate => disable 2 options
+              selectOption.querySelector('option[value="I forgot my Password"]').disabled = (selectPerson.value == 'Candidate');
+              selectOption.querySelector('option[value="I forgot my account"]').disabled = (selectPerson.value == 'Candidate');
+            });
+            selectPerson.dispatchEvent(new Event('change'));
+          });
+    </script> 
+
+    <!-- disable or enable dependent option inside the support form -->
+    <script>
+        function optionCheck() {
+            if(document.getElementById('optionChoice').value!='')
+                document.getElementById('relatedOption').disabled = false;
+            else
+                document.getElementById('relatedOption').disabled = true;
+        }
+    </script>
+
+    <!-- Hide the sidebar after clicking on a button -->
+    <script>
+        $(document).ready(function() {
+            jQuery("#offcanvasRight, .offcanvas-body a").click(function(){
+                console.log($(this).attr('href'));
+                jQuery('.offcanvas').offcanvas('hide');
+            });
+        })
+    </script>
+
+    <!-- closed job modal -->
+    <script>
+        setTimeout(function() {
+            var modal = document.querySelector("#closed_job_modal");
+            if(modal) {
+                modal.click();
+            }
+        }, 1 * 50); 
+     </script>
+
+    <!--Only frontend timer  -->
+    {% block countdown %}
+        {% for countdown in show_countdowns %}
+            <script>
+                const countdownTimer = new Date('{{ countdown.timer }}').getTime();
+                const interval = setInterval(function() {
+                const now = new Date().getTime();
+                const diff = countdownTimer - now;
+
+                // format datetime
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60 )) / (1000 * 60 ));
+                const s = Math.floor((diff % (1000 * 60 )) / 1000 ) ;
+                
+                //views
+                const countdown = document.getElementById("ticking").innerHTML = d + " days, " + ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2); 
+                
+                
+                if((countdown < '0days, 23:59:59')) {
+                    document.getElementById("ticking").style.color = "red";
+                    document.getElementById("notification").style.color = "red";
+                    document.getElementById("notification").classList.add("btn", "btn-outline-danger");
+                    document.getElementById("notification").innerHTML = "Don't miss the last day !"
+                }
+
+                if (diff > 0) {
+                    document.getElementById("ticking").innerHTML = d + " days, " + ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+                    //Hide waiting-list.html when countdown is running 
+                    $('#wait_list').css('display', 'none');
+                    // Show that the wait-list is not accessible
+                    $('#no_wait_list').css('display', 'block');
+                    
+                }
+                else {
+                    clearInterval(interval);
+                    document.getElementById("ticking").innerHTML = "CLOSED VACANT POSITIONS";
+                    document.getElementById("ticking").style.color = "red";
+                    
+                    //Hide waiting-list.html when countdown is running 
+                    $('#wait_list').css("display", "block");
+                    // Show that the wait-list is not accessible
+                    $('#no_wait_list').css("display", "none");
+                    
+                    // Disable 'Candidate' option in support.html when countdown is over.
+                    $('option[value="Candidate"]').attr("disabled", "disabled");
+
+                    // Hide pulse the text in opprtunities_info.html when countdown is over
+                    document.getElementById("notification").innerHTML = ""
+                    document.getElementById("notification").classList.remove("btn", "btn-outline-danger");
+
+                    //Beyond the countdown, disable all vacant positions
+                    document.querySelectorAll('.disabled_btn').forEach(function(el) {
+                        el.disabled = true;
+                        el.style.color = 'white';
+                        el.style.borderColor = 'white';
+                    });
+                    document.querySelectorAll('#disabled_description').forEach(function(el) {
+                        el.style.display = 'none';
+                        
+                    });
+                    
+                    //Beyond the countdown, disable quantity inside the opportunities-info
+                    document.querySelectorAll('.disabled_qty').forEach(function(el) {
+                        el.style.display = 'none';
+                    });
+                    
+                    //modal informing the closing of the job registrations 
+                    '{% block time_over %}'
+                    $('#all_countdown_closed').modal('show');
+                    '{% endblock %}'
+                    //Disable the send button inside the form
+                    document.querySelectorAll('.send_button').forEach(function(el) {
+                        el.disabled = true;
+                    });
+                    
+                    //Hide modals for all job closed when time is over
+                    $('#backend_closed, #frontend_closed, #fullstack_closed, #intern_closed,' + 
+                    '#back_full_closed, #back_intern_closed, #front_back_closed, #front_full_closed, #front_intern_closed, #full_Intern_closed' + 
+                    '#back_full_intern_closed, #front_back_full_closed, #front_back_intern_closed, #front_full_intern_closed, #all_closed').modal('hide');
+                    
+                }
+
+                }, 1000);
+            </script>
+        {% endfor %}
+    {% endblock countdown %}
+
+    <!--Pulse alert text in the last day in opportunities_info.html -->
+    <!-- Function to pulse the text -->
+    <script>
+        (function blink() {
+            $('.text_last_day').fadeOut(1000).fadeIn(1000, blink);
+            $('.text_jobs').fadeOut(800).fadeIn(800, blink);
+        })();
+    </script>
+    
+    <!--disable backend button without changes-->  
+    <script>
+        const input = document.querySelectorAll('input, textarea');
+            for( const data of input) {
+                data.saved = data.value;
+            }
+            (enabledButton = () => {
+                var button  = true;
+                for ( const data of input) {
+                    if (data.saved !== data.value ) {
+                        button = false;
+                        break;
+                    }
+                }
+                document.getElementById("btn_notepad").disabled = button;
+                document.getElementById("btn_timer").disabled = button;
+                document.getElementById("btn_openings").disabled = button;
+            })();
+            document.oninput = enabledButton
+    </script>
+
+</body>
+</html>

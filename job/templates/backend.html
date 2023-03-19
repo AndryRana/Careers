@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block bg-image %}
+<style>
+    body {
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url("/static/img/support_bg.jpg");
+        background-position: center 0px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+<!--Block type effect not used-->
+{% block typeEffect %} {% endblock %}
+
+<!--Block countdown not used-->
+{% block countdown %} {% endblock %}
+
+<!-- Navbar content -->
+{% block navbar-main %}
+<i class="fas fa-project-diagram text-info"></i>&nbsp;&nbsp; Backend
+<a class="text-info typed-effect2 text-decoration-none">We <span class="text-light" id="text_anim4"></span></a>
+{% endblock navbar-main %}
+
+<!--Sidebar-->
+{% block sidebar %}
+<a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#logout">Logout</a>
+{% if request.user.is_superuser %}
+<a href="{% url 'admin:index' %}" target="_blank" class="btn btn-outline-light">Administrator</a>
+{% else %}
+<a href="{% url 'support' %}"  class="btn btn-outline-success">support</a>
+{% endif %}
+<hr><br>
+{% endblock sidebar %}
+
+<!--Page Content -->
+{% block content-main %}
+<div class="container mt-3" style="width: 90%;">
+    <span style="margin-left: -10px;" class="text-light small_text">
+        Welcome to your Backend: <strong><span class="text-info">{{ user.get_username }}</span></strong>
+    </span>
+    <div class="justify-content-center align-items-center row mt-4">
+        <h6 class="btn btn-lg btn-outline-info lg_text" style="width: 100%; cursor: default;">
+            <strong><i class="fas fa-solid fa-user-gear"></i>&nbsp;&nbsp; Control Panel</strong>
+        </h6>
+        <div class="card mt-2" style="background-color:rgba(15, 3, 33, 0.55);">
+            <div class="row">
+                <!--First card-->
+                <div class="col-xl-3 col-sm-6 col-6 p-2">
+                    <div class="card" style="background-color: transparent;">
+                        <button class="btn btn-outline-primary card_font btn-lg border-candidate" data-bs-toggle="modal" data-bs-target="#CandidateNumberModal">
+                            <i class="fas fa-id-badge fa-7x mb-1"></i>
+                            <br> Candidates
+                        </button>
+                    </div>
+                </div>
+                <!--Second card-->
+                <div class="col-xl-3 col-sm-6 col-6 p-2">
+                    <div class="card" style="background-color: transparent;" >
+                        {% for job in jobOpenings %}
+                        <button class="btn btn-outline-success card_font btn-lg border-oppo" data-bs-toggle="modal" data-bs-target="#jobOpeningsModal{{ job.id }}">
+                            <i class="fas fa-users fa-7x mb-1"></i>
+                            <br> Opportunities
+                        </button>
+                        {% include 'modals/backend/jobOpenings.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--Third card-->
+                <div class="col-xl-3 col-sm-6 col-6 p-2">
+                    <div class="card" style="background-color: transparent;">
+                        {% for countdown in show_countdowns %}
+                        <button class="btn btn-outline-danger card_font btn-lg border-timer" data-bs-toggle="modal" data-bs-target="#showCountdownModal{{ countdown.id }}">
+                            <i class="fas fa-hourglass fa-7x mb-1"></i>
+                            <br> Countdown
+                        </button>
+                            {% include 'modals/backend/show_countdown.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--Fouth card-->
+                <div class="col-xl-3 col-sm-6 col-6 p-2">
+                    <div class="card" style="background-color: transparent;">
+                        {% for notepad in allNotes %}
+                        <button class="btn btn-outline-warning card_font btn-lg border-notepad" data-bs-toggle="modal" data-bs-target="#notepadModal{{ notepad.id }}">
+                            <i class="fas fa-file-alt fa-7x mb-1"></i>
+                            <br> Notepad
+                        </button>
+                            {% include 'modals/backend/notepad.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--Fifth card-->
+                <div class="col-xl-3 col-sm-6 col-6 p-2 ">
+                    <div class="card " style="background-color: transparent;">
+                        <button class="btn btn-outline-light card_font btn-lg border-create-vacancy" data-bs-toggle="modal" data-bs-target="#vacancyModal">
+                            <i class="fas fa-user-plus fa-7x mb-1"></i>
+                            <br> Create vacancies
+                        </button>
+                            {% include 'modals/backend/vacancy.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Typed JS Effect -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+    var typed4 = new Typed('#text_anim4', {
+
+        strings: [
+            'are the future',
+            'are Designer',
+            'are Developer',
+            'are Creative'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'modals/backend/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="vacancyModal" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-dark fas fa-user-plus"></i>&nbsp;&nbsp; Create new vacancy {% endblock %}
+
+<!--Block notepad From -->
+{% block form-notepad %}
+<form action="/vacancies" method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="modal-body">
+        <div class="input-group mb-2">
+            <select name="target" class="form-select small_text" onchange="optionCheck()" id="optionChoice" required >
+                <option value="">Select data target</option>
+                <option disabled></option>
+                <option value="frontendModal">Frontend Modal</option>
+                <option value="backendModal">Backend Modal</option>
+                <option value="fullstackModal">Fullstack Modal</option>
+                <option value="internModal">Intern Modal</option>
+            </select>
+        </div>
+        <div class="input-group mb-2">
+            <input type="text" class="form-control small_text" name="title"  placeholder="Enter your title here..." />
+        </div>
+
+        <div class="from-group">
+            <textarea name="description"  maxlength="1200" rows="10" class="form-control small_text" placeholder="Enter the description here..." ></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm modal_button" data-bs-dismiss="modal"> Close </button>
+        <button type="submit" class="btn btn-outline-warning btn-sm modal_button" id="btn_notepad"> Save </button>
+    </div>
+</form>
+
+{% endblock %}

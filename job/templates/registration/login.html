@@ -1,0 +1,48 @@
+{% extends "layout.html"  %}
+
+<!-- Block Title (browser tab) -->
+{% block title %} Login {% endblock title %}
+
+<!--Navbar-->
+{% block navbar-main %} 
+<i class="fas fa-solid fa-right-to-bracket text-info"></i>&nbsp;&nbsp; Login
+{% endblock navbar-main %} 
+
+<!--Sidebar-->
+{% block sidebar %}
+<a href="{% url 'home' %}" class="btn btn-outline-info">Home</a>
+{% endblock sidebar %}
+
+<!-- Content -->
+{% block content-main %}
+<br>
+<div class="container mt-7" id="login-card">
+    <div class="card p-4 border-login">
+        <span class="btn btn-outline-info mt-2 mid_text" style="cursor: default;">
+            <i class="fas fa-duotone fa-lock"></i>&nbsp;&nbsp; LIMITED ACCESS
+        </span>
+        <form method="POST" autocomplete="off" novalidate>
+            {% csrf_token %}
+            <div class="input-group mb-2 mt-4">
+                <span class="btn input-group-text border-info bg-light label_icon">
+                    <i class="fas fa-user-alt text-info"></i>
+                </span>
+                <input type="text" class="form-control small_text" name="username" placeholder="Username">
+            </div>
+            <div class="input-group mb-2">
+                <span class="btn input-group-text border-info bg-light label_icon">
+                    <i class="fas fa-duotone fa-lock text-info"></i>
+                </span>
+                <input type="password" class="form-control small_text" name="password" placeholder="Password" id="password">
+            </div>
+            <div class="form-check form-switch ">
+                <input type="checkbox" class="form-check-input" onclick="checking()" style="float: right;">
+            </div>
+            <div class="d-grid gap-2">
+                <input type="submit" value="Enter" class="btn btn-info btn-sm mt-3 mb-2 rounded-pill fs-6">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

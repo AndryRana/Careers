@@ -1,0 +1,33 @@
+{% extends 'modals/backend/layout.html' %}
+
+<!--===Modal ID===-->
+{% block id-modal %} id="notepadModal{{ notepad.id }}" {% endblock %}
+
+<!--Modal Title-->
+{% block title-modal %}
+<i class="text-warning fas fa-file-alt"></i>&nbsp;&nbsp; Notepad {% endblock %}
+
+<!--Block notepad From -->
+{% block form-notepad %}
+<form action="/notepad" method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="modal-body">
+        <span class="card p-2 bg-warning text-light text-center mb-2 notepad_date_title" style="width: 100%;" >
+            {% now "m/d/Y | H:i" %}
+        </span>
+        <input type="hidden" name="id" value="{{ notepad.id }}" readonly />
+
+        <div class="input-group mb-2">
+            <input type="text" class="form-control small_text" name="title" value="{{ notepad.title}}" placeholder="Enter your title here..." />
+        </div>
+
+        <div class="from-group">
+            <textarea name="text"  maxlength="1200" rows="10" class="form-control small_text" placeholder="Enter your text here..." >{{ notepad.text }}</textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary btn-sm modal_button"> Clear </button>
+        <button type="submit" class="btn btn-outline-warning btn-sm modal_button" id="btn_notepad"> Save </button>
+    </div>
+</form>
+{% endblock %}
