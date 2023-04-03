@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-
+import django_heroku
 from pathlib import Path
 from decouple import config
 
@@ -81,8 +81,12 @@ WSGI_APPLICATION = "Careers.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_USER_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        
     }
 }
 
@@ -122,9 +126,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'job/static')]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+django_heroku.settings(locals())
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -133,10 +139,10 @@ LOGIN_REDIRECT_URL = 'backend'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Email Server
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ranamiran75@gmail.com'
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 # STATICFILE
