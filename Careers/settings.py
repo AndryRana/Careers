@@ -82,10 +82,10 @@ WSGI_APPLICATION = "Careers.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        # "NAME": config('DB_NAME'),
-        # "USER": config('DB_USER'),
-        # "PASSWORD": config('DB_USER_PASSWORD'),
-        # "HOST": config('DB_HOST'),
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_USER_PASSWORD'),
+        "HOST": config('DB_HOST'),
         
     }
 }
