@@ -354,7 +354,7 @@ def waiting_list(request):
         
 # ==============================Backend==========================================
 
-@login_required(login_url = "logout")
+@login_required(login_url = "login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def backend (request):
     number = Registered_email.objects.all().count()
