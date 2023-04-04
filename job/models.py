@@ -20,7 +20,7 @@ class Message(models.Model):
         ('Unread', 'Unread')
     }
     
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     message = models.TextField()
     situation = models.CharField(max_length=50, null=True, choices=SITUATION, default='Unread')
     created_at = models.DateTimeField(auto_now_add=True)
